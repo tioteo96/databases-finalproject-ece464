@@ -7,17 +7,17 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-public class UserController {
-
-    @GetMapping(value = "/api/user/{id}")
-    public String get_user(@PathVariable String id){
+public class PacketController {
+    
+    @GetMapping(value = "/api/packet/{id}")
+    public String get_packet(@PathVariable String id){
         //TODO: change return datatype
-        return "get user id: " + id;
+        return "get packet id: " + id;
     }
 
-    @PostMapping(value = "/api/user", consumes = "application/json", produces = "application/json")
-    public String create_user(@RequestBody String user){
+    @PostMapping(value = "/api/packet", consumes = "application/json", produces = "application/json")
+    public String create_packet(@RequestBody String packet){
         //TODO: change return and body datatypes
-        return "create user id: ";
+        return "create packet with id: ";
     }
 }

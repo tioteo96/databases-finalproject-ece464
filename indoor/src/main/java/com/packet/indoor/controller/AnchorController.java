@@ -7,17 +7,17 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-public class UserController {
-
-    @GetMapping(value = "/api/user/{id}")
-    public String get_user(@PathVariable String id){
+public class AnchorController {
+    
+    @GetMapping(value = "/api/anchor/{id}")
+    public String get_anchor(@PathVariable String id){
         //TODO: change return datatype
-        return "get user id: " + id;
+        return "get anchor id: " + id;
     }
 
-    @PostMapping(value = "/api/user", consumes = "application/json", produces = "application/json")
-    public String create_user(@RequestBody String user){
+    @PostMapping(value = "/api/anchor", consumes = "application/json", produces = "application/json")
+    public String create_anchor(@RequestBody String anchor){
         //TODO: change return and body datatypes
-        return "create user id: ";
+        return "create anchor with id: ";
     }
 }
