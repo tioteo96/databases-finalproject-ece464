@@ -23,17 +23,23 @@ public class AssignedTag extends BaseEntity{
     
     @EmbeddedId
     private AssignedTagId assignedTagId;
+
     @Embedded
     @NonNull
     @OneToOne
+    @JoinColumn(name = "userId")
     private User user;
+
     @Embedded
     @NonNull
     @OneToOne
+    @JoinColumn(name = "tagId")
     private Tag tag;
+
     @Embedded
     @NonNull
     private LocalDateTime registeredAt;
+
     @Embedded
     private LocalDateTime unregisteredAt;
 
