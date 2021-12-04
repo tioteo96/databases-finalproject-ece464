@@ -18,13 +18,15 @@ import java.util.stream.Collectors;
 public class UserDetail implements UserDetails {
 
     private String username;
+    private String groupname;
     private List<String> roles;
     private Boolean isActive;
     private Boolean isDeleted;
 
-    public static UserDetail create(String username, List<String> roles, Boolean isActive, Boolean isDeleted){
+    public static UserDetail create(String username, String groupname, List<String> roles, Boolean isActive, Boolean isDeleted){
         return UserDetail.builder()
                 .username(username)
+                .groupname(groupname)
                 .roles(roles)
                 .isActive(isActive)
                 .isDeleted(isDeleted)

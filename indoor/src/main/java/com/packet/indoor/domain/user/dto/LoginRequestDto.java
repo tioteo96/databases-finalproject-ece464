@@ -7,6 +7,4 @@ public class LoginRequestDto {
     private String username;
     private String groupname;
     private String password;
-
-    public
 }

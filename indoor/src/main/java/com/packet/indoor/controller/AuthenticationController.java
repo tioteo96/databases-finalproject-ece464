@@ -1,8 +1,11 @@
 package com.packet.indoor.controller;
 
+import com.packet.indoor.domain.user.Username;
 import com.packet.indoor.domain.user.dto.LoginRequestDto;
+import com.packet.indoor.domain.user.dto.LoginResponseDto;
 import com.packet.indoor.domain.user.dto.UserCreateRequestDto;
 import com.packet.indoor.domain.user.dto.UserCreateResponseDto;
+import com.packet.indoor.service.AuthenticationService;
 import com.packet.indoor.service.UserService;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +25,8 @@ public class AuthenticationController {
 
     @Autowired
     private UserService userService;
+    @Autowired
+    private AuthenticationService authenticationService;
 
     @PostMapping("/signUp")
     public ResponseEntity<UserCreateResponseDto> signUpUser(@RequestBody UserCreateRequestDto requestDto) {
@@ -31,7 +36,9 @@ public class AuthenticationController {
 
     @PostMapping("/login")
     public ResponseEntity<?> authenticateUser(@RequestBody LoginRequestDto requestDto) {
-
+        Username username = Username.create(requestDto.getUsername(), requestDto.getGroupname());
+        String rawPassword = requestDto.getPassword();
+        LoginResponseDto responseDto = authenticationService.verifyAndGenerateJsonWebToken(username, rawPassword);
         return new ResponseEntity<>(responseDto, HttpStatus.OK);
     }
 }

@@ -2,10 +2,12 @@ package com.packet.indoor.domain.user;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
+import lombok.Getter;
 
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
 
+@Getter
 @AllArgsConstructor
 @Builder(builderClassName = "Builder")
 @Embeddable

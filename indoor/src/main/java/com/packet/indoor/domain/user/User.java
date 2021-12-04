@@ -5,11 +5,13 @@ import com.packet.indoor.domain.user.dto.UserCreateResponseDto;
 import com.packet.indoor.util.Role;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
 @Builder(builderClassName = "Builder")
+@Getter
 @AllArgsConstructor
 @Table(name = "usr")
 @Entity
