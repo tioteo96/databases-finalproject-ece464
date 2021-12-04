@@ -23,13 +23,13 @@ public class Anchor extends BaseEntity{
     @Embedded
     private String description;
     @Embedded
-    private double xCoordinate;
+    private Double xCoordinate;
     @Embedded
-    private double yCoordinate;
+    private Double yCoordinate;
     @Embedded
-    private double zCoordinate;
+    private Double zCoordinate;
 
-    public static Anchor create(String manufacturer, String description, double xCoordinate, double yCoordinate, double zCoordinate) {
+    public static Anchor create(String manufacturer, String description, Double xCoordinate, Double yCoordinate, Double zCoordinate) {
         return Anchor.builder()
                 .manufacturer(manufacturer)
                 .description(description)
