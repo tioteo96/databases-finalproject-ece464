@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.servlet.http.HttpServletRequest;
 
 @AllArgsConstructor
-@RequestMapping("api/v1/authenticate")
+@RequestMapping("api/v1")
 @RestController
 public class AuthenticationController {
 

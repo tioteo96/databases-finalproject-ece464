@@ -21,13 +21,16 @@ public class User extends BaseEntity {
     private Username username;
     @Embedded
     private Password password;
+    @Embedded
+    private UserStatus userStatus;
     @Enumerated(EnumType.STRING)
     private Role role;
 
-    public static User create(Username username, Password password, Role role) {
+    public static User create(Username username, Password password, UserStatus userStatus, Role role) {
         return User.builder()
                 .username(username)
                 .password(password)
+                .userStatus(userStatus)
                 .role(role)
                 .build();
     }
