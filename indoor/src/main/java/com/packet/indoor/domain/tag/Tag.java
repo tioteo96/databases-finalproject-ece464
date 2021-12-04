@@ -18,11 +18,8 @@ public class Tag extends BaseEntity{
     
     @EmbeddedId
     private TagId tagId;
-    @Embedded
     private String manufacturer;
-    @Embedded
     private String description;
-    @Embedded
     @NonNull
     private Boolean use_status;
 

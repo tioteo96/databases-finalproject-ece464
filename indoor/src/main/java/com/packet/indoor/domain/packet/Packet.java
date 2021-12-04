@@ -23,23 +23,19 @@ public class Packet extends BaseEntity{
     @EmbeddedId
     private PacketId packetId;
 
-    @Embedded
     @NonNull
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "anchorId")
     private Anchor anchor;
 
-    @Embedded
     @NonNull
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "assignedTagId")
     private AssignedTag assignedTag;
 
-    @Embedded
     @NonNull
     private LocalDateTime receivedTime;
 
-    @Embedded
     private Double distance;
 
     public static Packet create(Anchor anchor, AssignedTag assignedTag, LocalDateTime receivedTime, Double distance) {
