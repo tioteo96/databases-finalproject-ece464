@@ -1,10 +1,12 @@
 package com.packet.indoor.domain.user;
 
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
 
+@AllArgsConstructor
 @Builder(builderClassName = "Builder")
 @Embeddable
 public class UserStatus {
@@ -15,7 +17,7 @@ public class UserStatus {
 
     protected UserStatus(){}
 
-    public UserStatus create() {
+    public static UserStatus create() {
         return UserStatus.builder()
                 .isActive(false)
                 .isDeleted(false)

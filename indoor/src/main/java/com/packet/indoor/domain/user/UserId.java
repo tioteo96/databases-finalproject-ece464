@@ -1,13 +1,30 @@
 package com.packet.indoor.domain.user;
 
-import javax.persistence.Column;
-import javax.persistence.Embeddable;
-import javax.persistence.GeneratedValue;
-import java.io.Serializable;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.Getter;
 
+import javax.persistence.*;
+import java.io.Serializable;
+import java.util.UUID;
+
+
+@AllArgsConstructor
+@Builder(builderClassName = "Builder")
+@Getter
 @Embeddable
 public class UserId implements Serializable {
-    @GeneratedValue
+
+    @GeneratedValue(strategy= GenerationType.AUTO)
     @Column(name = "usr_id")
-    private Long id;
+    private UUID id;
+
+    protected UserId(){}
+
+    public static UserId create(){
+        return UserId.builder()
+                .id(UUID.randomUUID())
+                .build();
+    }
 }

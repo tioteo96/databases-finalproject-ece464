@@ -1,12 +1,16 @@
 package com.packet.indoor.domain.user;
 
+import lombok.AllArgsConstructor;
 import lombok.Builder;
+import lombok.Getter;
 import org.apache.commons.lang3.StringUtils;
 
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
 
+@AllArgsConstructor
 @Builder(builderClassName = "Builder")
+@Getter
 @Embeddable
 public class Username {
     @Column(name = "username", length = 100, unique = true, nullable = false)

@@ -2,11 +2,13 @@ package com.packet.indoor.domain.user;
 
 import lombok.AllArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.stereotype.Component;
 
 import java.nio.charset.Charset;
 import java.util.Random;
 
 @AllArgsConstructor
+@Component
 public class PasswordService {
 
     private final PasswordEncoder passwordEncoder;
