@@ -16,17 +16,11 @@ public class Anchor extends BaseEntity{
     
     @EmbeddedId
     private AnchorId anchorId;
-    @Embedded
     private String secret;
-    @Embedded
     private String manufacturer;
-    @Embedded
     private String description;
-    @Embedded
     private Double xCoordinate;
-    @Embedded
     private Double yCoordinate;
-    @Embedded
     private Double zCoordinate;
 
     public static Anchor create(String manufacturer, String description, Double xCoordinate, Double yCoordinate, Double zCoordinate) {
