@@ -51,7 +51,7 @@ public class AuthenticationFilter extends OncePerRequestFilter {
             List<String> allRoles = Stream.of(Role.values())
                     .map(Role::value)
                     .collect(Collectors.toList());
-            UserDetail userDetail = UserDetail.create("non-jwt", allRoles, true, false);
+            UserDetail userDetail = UserDetail.create("non-jwt", "admin", allRoles, true, false);
 
             request.setAttribute("user", userDetail);
             Authentication authentication = new UsernamePasswordAuthenticationToken(userDetail, "", userDetail.getAuthorities());

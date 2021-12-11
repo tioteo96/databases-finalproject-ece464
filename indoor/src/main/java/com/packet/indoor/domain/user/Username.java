@@ -1,16 +1,31 @@
 package com.packet.indoor.domain.user;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
 import org.apache.commons.lang3.StringUtils;
 
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
 
+@AllArgsConstructor
+@Builder(builderClassName = "Builder")
+@Getter
 @Embeddable
 public class Username {
-    @Column(length = 100, unique = true, nullable = false)
+    @Column(name = "username", length = 100, unique = true, nullable = false)
     private String name;
-    @Column(length = 100)
+    @Column(name = "usergroup", length = 100)
     private String group;
+
+    protected Username(){}
+
+    public static Username create(String username, String groupname){
+        return Username.builder()
+                .name(username)
+                .group(groupname)
+                .build();
+    }
 
     @Override
     public String toString(){

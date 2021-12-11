@@ -9,6 +9,9 @@ public enum ErrorMessage {
     INVALID_JWT_TOKEN("wrong jwt format"),
     USER_NOT_ACTIVE("user is not active"),
     USER_DELETED("user is deleted"),
+    WRONG_PASSWORD("worng password"),
+
+    USER_NOT_FOUND("user does not exist")
     ;
 
     private String value;
