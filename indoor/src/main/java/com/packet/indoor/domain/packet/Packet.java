@@ -6,14 +6,17 @@ import com.packet.indoor.domain.assignedTag.AssignedTag;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.NonNull;
+import lombok.Setter;
 
 import java.time.LocalDateTime;
 
 import javax.persistence.*;
 
 @Builder(builderClassName = "Builder")
+@Getter
+@Setter
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name = "packet")
@@ -23,19 +26,18 @@ public class Packet extends BaseEntity{
     @EmbeddedId
     private PacketId packetId;
 
-    @NonNull
     @ManyToOne
     @JoinColumn(name = "anchorId")
     private Anchor anchor;
 
-    @NonNull
     @ManyToOne
     @JoinColumn(name = "assignedTagId")
     private AssignedTag assignedTag;
 
-    @NonNull
+    @Column(nullable = false)
     private LocalDateTime receivedTime;
 
+    @Column(nullable = false)
     private Double distance;
 
     public static Packet create(Anchor anchor, AssignedTag assignedTag, LocalDateTime receivedTime, Double distance) {
