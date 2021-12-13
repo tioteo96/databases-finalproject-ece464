@@ -18,32 +18,33 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/api/v1/")
+@RequestMapping("/api/anchor")
 public class AnchorController {
     
-    @Autowired
-    private AnchorRepository anchorRepository;
+//    @Autowired
+//    private AnchorRepository anchorRepository;
 
-    @GetMapping(value = "anchors")
-    public ResponseEntity<List<Anchor>> get_anchor_list(){
-        return new ResponseEntity<>(anchorRepository.findAll(), HttpStatus.OK);
+    //TODO: register a new anchor only through the admin user
+    @PostMapping(value = "/register")
+    public ResponseEntity<?> registerAnchor(@RequestBody Anchor anchor){
+//        Anchor created_anchor = anchorRepository.save(anchor);
+        return new ResponseEntity<>(null, HttpStatus.OK);
     }
 
-    @GetMapping(value = "anchor/{id}")
-    public ResponseEntity<Anchor> get_anchor(@PathVariable("id") Long id){
-        AnchorId anchor_id = new AnchorId();
-        anchor_id.setId(id);
-        Optional<Anchor> opt_anchor = anchorRepository.findById(anchor_id);
-        if (!opt_anchor.isPresent()) return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-        Anchor anchor = opt_anchor.get();
-        System.out.println(anchor.toString());
-        return new ResponseEntity<>(anchor, HttpStatus.OK);
+    //TODO: find all anchors
+    @GetMapping(value = "/all")
+    public ResponseEntity<List<Anchor>> findAllAnchors(){
+        return new ResponseEntity<>(null, HttpStatus.OK);
     }
 
-    //TODO: FIX THIS
-    @PostMapping(value = "anchor")
-    public ResponseEntity<Anchor> create_anchor(@RequestBody Anchor anchor){
-        Anchor created_anchor = anchorRepository.save(anchor);
-        return new ResponseEntity<>(created_anchor, HttpStatus.CREATED);
-    }
+//    @GetMapping(value = "anchor/{id}")
+//    public ResponseEntity<Anchor> get_anchor(@PathVariable("id") Long id){
+//        AnchorId anchor_id = new AnchorId();
+//        anchor_id.setId(id);
+//        Optional<Anchor> opt_anchor = anchorRepository.findById(anchor_id);
+//        if (!opt_anchor.isPresent()) return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+//        Anchor anchor = opt_anchor.get();
+//        System.out.println(anchor.toString());
+//        return new ResponseEntity<>(anchor, HttpStatus.OK);
+//    }
 }
