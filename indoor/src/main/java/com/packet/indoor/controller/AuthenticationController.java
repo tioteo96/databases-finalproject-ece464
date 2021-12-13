@@ -6,7 +6,6 @@ import com.packet.indoor.domain.user.dto.LoginResponseDto;
 import com.packet.indoor.domain.user.dto.UserCreateRequestDto;
 import com.packet.indoor.domain.user.dto.UserCreateResponseDto;
 import com.packet.indoor.service.AuthenticationService;
-import com.packet.indoor.service.PacketService;
 import com.packet.indoor.service.UserService;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +13,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.http.HttpServletRequest;
 
 @AllArgsConstructor
 @RequestMapping("/api/v1")
@@ -25,12 +23,10 @@ public class AuthenticationController {
     private UserService userService;
     @Autowired
     private AuthenticationService authenticationService;
-    @Autowired
-    private PacketService packetService;
 
     @PostMapping("/signUp")
     public ResponseEntity<UserCreateResponseDto> signUpUser(@RequestBody UserCreateRequestDto requestDto) {
-        UserCreateResponseDto responseDto = userService.createAdmin(requestDto);
+        UserCreateResponseDto responseDto = userService.createUser(requestDto);
         return new ResponseEntity<>(responseDto, HttpStatus.OK);
     }
 

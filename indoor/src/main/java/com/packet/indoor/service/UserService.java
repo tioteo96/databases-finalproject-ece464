@@ -6,6 +6,7 @@ import com.packet.indoor.domain.user.dto.UserCreateResponseDto;
 import com.packet.indoor.repository.user.JpaUserRepository;
 import com.packet.indoor.util.Role;
 import lombok.AllArgsConstructor;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -17,7 +18,7 @@ public class UserService {
     private JpaUserRepository jpaUserRepository;
 
     @Transactional
-//    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     public UserCreateResponseDto createAdmin(UserCreateRequestDto userCreateRequestDto){
         UserId userId = UserId.create();
         Username username = Username.create(userCreateRequestDto.getUsername(), userCreateRequestDto.getGroupname());
