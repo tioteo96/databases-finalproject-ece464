@@ -20,6 +20,7 @@ public class Anchor extends BaseEntity{
     
     @EmbeddedId
     private AnchorId anchorId;
+
     @Column(nullable = false)
     private String secret;
     private String manufacturer;

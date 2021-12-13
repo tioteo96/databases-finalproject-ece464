@@ -23,7 +23,9 @@ public class Tag extends BaseEntity{
     private TagId tagId;
     private String manufacturer;
     private String description;
+
     @Column(nullable = false)
+    @NonNull
     private Boolean use_status;
 
     public static Tag create(String manufacturer, String description, Boolean use_status) {
