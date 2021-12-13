@@ -1,11 +1,7 @@
 package com.packet.indoor.domain.tag;
 
 import com.packet.indoor.domain.BaseEntity;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 
