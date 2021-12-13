@@ -1,49 +1,49 @@
 package com.packet.indoor.domain.packet;
 
-import com.packet.indoor.domain.BaseEntity;
-import com.packet.indoor.domain.anchor.Anchor;
-import com.packet.indoor.domain.assignedTag.AssignedTag;
-
+import com.influxdb.annotations.Column;
+import com.influxdb.annotations.Measurement;
+import com.influxdb.query.FluxRecord;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
-import lombok.NoArgsConstructor;
-import lombok.NonNull;
+import lombok.Getter;
+import lombok.experimental.FieldNameConstants;
 
-import java.time.LocalDateTime;
+import java.time.Instant;
 
-import javax.persistence.*;
-
+@FieldNameConstants
 @Builder(builderClassName = "Builder")
+@Getter
 @AllArgsConstructor
-@NoArgsConstructor
-@Table(name = "packet")
-@Entity
-public class Packet extends BaseEntity{
-    
-    @EmbeddedId
-    private PacketId packetId;
+@Measurement(name="packet")
+public class Packet {
 
-    @NonNull
-    @ManyToOne
-    @JoinColumn(name = "anchorId")
-    private Anchor anchor;
+    @Column(timestamp = true)
+    private Instant time;
 
-    @NonNull
-    @ManyToOne
-    @JoinColumn(name = "assignedTagId")
-    private AssignedTag assignedTag;
+    @Column(tag = true)
+    private String tag;
 
-    @NonNull
-    private LocalDateTime receivedTime;
+    @Column(tag = true)
+    private String anchor;
 
-    private Double distance;
+    @Column(name = "signal")
+    private Double signal;
 
-    public static Packet create(Anchor anchor, AssignedTag assignedTag, LocalDateTime receivedTime, Double distance) {
+    public static Packet create(String tagId, String anchorId, Double signal, Instant instant){
         return Packet.builder()
-                .anchor(anchor)
-                .assignedTag(assignedTag)
-                .receivedTime(receivedTime)
-                .distance(distance)
+                .time(instant)
+                .tag(tagId)
+                .anchor(anchorId)
+                .signal(signal)
+                .build();
+    }
+
+    public static Packet create(FluxRecord record) {
+        return Packet.builder()
+                .time((Instant) record.getValueByKey("_time"))
+                .tag((String) record.getValueByKey(Fields.tag))
+                .anchor((String) record.getValueByKey(Fields.anchor))
+                .signal((Double) record.getValueByKey("_value"))
                 .build();
     }
 }
