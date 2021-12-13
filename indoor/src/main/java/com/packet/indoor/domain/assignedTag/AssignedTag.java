@@ -6,8 +6,9 @@ import com.packet.indoor.domain.user.User;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.NonNull;
+import lombok.Setter;
 
 import java.time.LocalDateTime;
 
@@ -15,6 +16,8 @@ import javax.persistence.*;
 
 
 @Builder(builderClassName = "Builder")
+@Getter
+@Setter
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name = "assigned_tag")
@@ -34,6 +37,7 @@ public class AssignedTag extends BaseEntity{
     @JoinColumn(name = "tagId")
     private Tag tag;
 
+    @Column(nullable = false)
     @NonNull
     private LocalDateTime registeredAt;
 

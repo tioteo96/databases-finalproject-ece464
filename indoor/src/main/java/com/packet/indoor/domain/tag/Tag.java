@@ -3,13 +3,16 @@ package com.packet.indoor.domain.tag;
 import com.packet.indoor.domain.BaseEntity;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.NonNull;
+import lombok.Setter;
 
 import javax.persistence.*;
 
 
 @Builder(builderClassName = "Builder")
+@Getter
+@Setter
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name = "tag")
@@ -20,6 +23,8 @@ public class Tag extends BaseEntity{
     private TagId tagId;
     private String manufacturer;
     private String description;
+
+    @Column(nullable = false)
     @NonNull
     private Boolean use_status;
 
