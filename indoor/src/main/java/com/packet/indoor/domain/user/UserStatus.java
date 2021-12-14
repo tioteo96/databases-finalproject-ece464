@@ -21,7 +21,14 @@ public class UserStatus {
 
     public static UserStatus create() {
         return UserStatus.builder()
-                .isActive(false)
+                .isActive(true)
+                .isDeleted(false)
+                .build();
+    }
+
+    public static UserStatus active() {
+        return UserStatus.builder()
+                .isActive(true)
                 .isDeleted(false)
                 .build();
     }

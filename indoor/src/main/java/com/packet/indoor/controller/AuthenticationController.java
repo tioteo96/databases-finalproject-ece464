@@ -4,7 +4,7 @@ import com.packet.indoor.domain.user.Username;
 import com.packet.indoor.domain.user.dto.LoginRequestDto;
 import com.packet.indoor.domain.user.dto.LoginResponseDto;
 import com.packet.indoor.domain.user.dto.UserCreateRequestDto;
-import com.packet.indoor.domain.user.dto.UserCreateResponseDto;
+import com.packet.indoor.domain.user.dto.UserResponseDto;
 import com.packet.indoor.service.AuthenticationService;
 import com.packet.indoor.service.UserService;
 import lombok.AllArgsConstructor;
@@ -25,8 +25,8 @@ public class AuthenticationController {
     private AuthenticationService authenticationService;
 
     @PostMapping("/signUp")
-    public ResponseEntity<UserCreateResponseDto> signUpUser(@RequestBody UserCreateRequestDto requestDto) {
-        UserCreateResponseDto responseDto = userService.createUser(requestDto);
+    public ResponseEntity<UserResponseDto> signUpUser(@RequestBody UserCreateRequestDto requestDto) {
+        UserResponseDto responseDto = userService.createUser(requestDto);
         return new ResponseEntity<>(responseDto, HttpStatus.OK);
     }
 

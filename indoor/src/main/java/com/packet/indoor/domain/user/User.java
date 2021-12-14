@@ -1,12 +1,11 @@
 package com.packet.indoor.domain.user;
 
 import com.packet.indoor.domain.BaseEntity;
-import com.packet.indoor.domain.user.dto.UserCreateResponseDto;
+import com.packet.indoor.domain.user.dto.UserResponseDto;
 import com.packet.indoor.util.Role;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
@@ -41,10 +40,11 @@ public class User extends BaseEntity {
                 .build();
     }
 
-    public UserCreateResponseDto toResponseDto(){
-        return UserCreateResponseDto.builder()
+    public UserResponseDto toResponseDto(){
+        return UserResponseDto.builder()
                 .username(this.username.getName())
                 .groupname(this.username.getGroup())
+                .role((this.role))
                 .build();
     }
 }
