@@ -6,6 +6,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
 public class UiController {
+
+    @GetMapping(value = "/")
+    public String landing(){
+        return "redirect:login";
+    }
     
     @GetMapping(value = "/login")
     public String login(){
@@ -13,7 +18,7 @@ public class UiController {
     }
 
     @GetMapping(value = "/control")
-    // @PreAuthorize("hasRole('ROLE_ADMIN')")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     public String control(){
         return "control";
     }

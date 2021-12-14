@@ -34,7 +34,7 @@
                 <input type="password" placeholder="Password" id="password-9e38" name="password" class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white" required="required">
               </div>
               <div class="u-align-left u-form-group u-form-submit">
-                <a id="submit_button" href="#" class="u-btn u-btn-submit u-button-style">Submit</a>
+                <a id="login_button" href="#" class="u-btn u-btn-submit u-button-style">Log In</a>
                 <a id="register_button" href="#" class="u-btn u-btn-submit u-button-style">Register</a>
                 <input type="submit" value="submit" class="u-form-control-hidden">
               </div>
@@ -44,7 +44,7 @@
       </section>
     </body>
     <script>
-      let submit = document.getElementById("submit_button")
+      let login = document.getElementById("login_button")
       let register = document.getElementById("register_button")
   
       register.addEventListener('click', function (e) {
@@ -61,7 +61,7 @@
         document.getElementById("form").reset();
       });
   
-      submit.addEventListener('click', function (e) {
+      login.addEventListener('click', function (e) {
         let http = new XMLHttpRequest();
         http.open('POST', 'http://localhost:8080/api/v1/login', true);
         http.setRequestHeader('Content-type', 'application/json');
