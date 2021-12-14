@@ -10,4 +10,5 @@ import java.util.UUID;
 
 public interface TagRepository extends JpaRepository<Tag, UUID>{
     List<Tag> findAllByTagStatus(TagStatus tagStatus);
+    List<Tag> findAllByTagStatusNot(TagStatus tagStatus);
 }

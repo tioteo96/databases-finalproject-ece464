@@ -40,4 +40,12 @@ public class TagService {
                                             .collect(Collectors.toList());
         return responseDtos;
     }
+
+    public List<TagResponseDto> findAllUnavailableTags(TagStatus tagStatus){
+        List<Tag> unavailable_tags = tagRepository.findAllByTagStatusNot(tagStatus);
+        List<TagResponseDto> responseDtos = unavailable_tags.stream()
+                                            .map(tag -> tag.toResponseDto())
+                                            .collect(Collectors.toList());
+        return responseDtos;
+    }
 }

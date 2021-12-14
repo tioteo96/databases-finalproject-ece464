@@ -45,7 +45,6 @@ public class TagController {
         return new ResponseEntity<>(responseDtos, HttpStatus.OK);
     }
 
-    //TODO: find all tags that are available for assigning to user
     @GetMapping(value = "/all/available")
     public ResponseEntity<?> findAvailableTags(){
         TagStatus tagStatus = TagStatus.AVAILABLE;
@@ -56,7 +55,9 @@ public class TagController {
     //TODO: find all tags that are currently unavailable
     @GetMapping(value = "/all/unavailable")
     public ResponseEntity<?> findUnAvailableTags(){
-        return new ResponseEntity<>(null, HttpStatus.OK);
+        TagStatus tagStatus = TagStatus.AVAILABLE;
+        List<TagResponseDto> responseDtos = tagService.findAllUnavailableTags(tagStatus);
+        return new ResponseEntity<>(responseDtos, HttpStatus.OK);
     }
 
 //    @GetMapping(value = "tag/{id}")
