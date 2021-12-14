@@ -22,18 +22,22 @@
     <section class="u-clearfix u-section-1" id="sec-7bb6">
       <div class="u-clearfix u-sheet u-sheet-1">
         <div class="u-form u-form-1">
-          <form action="#" method="POST" class="u-clearfix u-form-spacing-10 u-form-vertical u-inner-form" source="custom" name="form" style="padding: 10px;">
+          <form id="form" action="#" method="POST" class="u-clearfix u-form-spacing-10 u-form-vertical u-inner-form" source="custom" name="form" style="padding: 10px;">
             <div class="u-form-group u-form-name">
               <label for="name-9e38" class="u-label">Username</label>
               <input type="text" placeholder="Username" id="name-9e38" name="username" class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white" required="">
             </div>
+            <div class="u-form-group u-form-name">
+              <label for="group-9e38" class="u-label">GroupName</label>
+              <input type="text" placeholder="GroupName" id="group-9e38" name="groupname" class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white" required="">
+            </div>
             <div class="u-form-group">
-              <label for="email-9e38" class="u-label">Password</label>
-              <input type="text" placeholder="Password" id="email-9e38" name="password" class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white" required="required">
+              <label for="password-9e38" class="u-label">Password</label>
+              <input type="password" placeholder="Password" id="password-9e38" name="password" class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white" required="required">
             </div>
             <div class="u-align-left u-form-group u-form-submit">
-              <a href="#" class="u-btn u-btn-submit u-button-style">Submit</a>
-              <a href="#" class="u-btn u-btn-submit u-button-style">Register</a>
+              <a id="submit_button" href="#" class="u-btn u-btn-submit u-button-style">Submit</a>
+              <a id="register_button" href="#" class="u-btn u-btn-submit u-button-style">Register</a>
               <input type="submit" value="submit" class="u-form-control-hidden">
             </div>
           </form>
@@ -41,4 +45,42 @@
       </div>
     </section>
   </body>
+  <script>
+    let submit = document.getElementById("submit_button")
+    let register = document.getElementById("register_button")
+
+    register.addEventListener('click', function (e) {
+      let http = new XMLHttpRequest();
+      http.open('POST', 'http://localhost:8080/api/v1/signUp', true);
+      http.setRequestHeader('Content-type', 'application/json');
+
+      var payload = {
+        "username": document.getElementById("name-9e38").value,
+        "groupname": document.getElementById("group-9e38").value,
+        "password": document.getElementById("password-9e38").value
+      }
+      http.send(JSON.stringify(payload));
+      document.getElementById("form").reset();
+    });
+
+    submit.addEventListener('click', function (e) {
+      let http = new XMLHttpRequest();
+      http.onreadystatechange = function () {
+        if (this.status == 200) {
+
+        }
+      };
+
+      http.open('POST', 'http://localhost:8080/api/v1/login', true);
+      http.setRequestHeader('Content-type', 'application/json');
+
+      var payload = {
+        "username": document.getElementById("name-9e38").value,
+        "groupname": document.getElementById("group-9e38").value,
+        "password": document.getElementById("password-9e38").value
+      }
+      http.send(JSON.stringify(payload));
+
+    });
+  </script>
 </html>
