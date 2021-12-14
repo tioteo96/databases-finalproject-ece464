@@ -14,6 +14,7 @@ Tags, Anchors and their assignments.
 ### Technical requirements
 
 This project is built on Java Spring Boot, PostgreSQL and InfluxDB.
+
 Due to InfluxDB dependencies, Java version 15 is required.
 
 ### Installation Requirements
