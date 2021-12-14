@@ -1,17 +1,16 @@
 package com.packet.indoor.controller;
 
 import java.util.List;
-import java.util.Optional;
 
 import com.packet.indoor.domain.anchor.Anchor;
-import com.packet.indoor.domain.anchor.AnchorId;
-import com.packet.indoor.repository.anchor.AnchorRepository;
 
+import com.packet.indoor.domain.anchor.dto.AnchorRequestDto;
+import com.packet.indoor.domain.anchor.dto.AnchorResponseDto;
+import com.packet.indoor.service.AnchorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,15 +19,14 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/api/anchor")
 public class AnchorController {
-    
-//    @Autowired
-//    private AnchorRepository anchorRepository;
 
-    //TODO: register a new anchor only through the admin user
+    @Autowired
+    private AnchorService anchorService;
+
     @PostMapping(value = "/register")
-    public ResponseEntity<?> registerAnchor(@RequestBody Anchor anchor){
-//        Anchor created_anchor = anchorRepository.save(anchor);
-        return new ResponseEntity<>(null, HttpStatus.OK);
+    public ResponseEntity<?> registerAnchor(@RequestBody AnchorRequestDto requestDto){
+        AnchorResponseDto responseDto = anchorService.registerNewAnchor(requestDto);
+        return new ResponseEntity<>(responseDto, HttpStatus.OK);
     }
 
     //TODO: find all anchors
