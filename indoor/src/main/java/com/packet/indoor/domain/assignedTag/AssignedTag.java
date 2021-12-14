@@ -1,6 +1,7 @@
 package com.packet.indoor.domain.assignedTag;
 
 import com.packet.indoor.domain.BaseEntity;
+import com.packet.indoor.domain.assignedTag.dto.AssignedTagResponseDto;
 import com.packet.indoor.domain.tag.Tag;
 import com.packet.indoor.domain.user.User;
 
@@ -48,6 +49,16 @@ public class AssignedTag extends BaseEntity{
                 .tag(tag)
                 .assigned(true)
                 .assignedAt(assignedAt)
+                .build();
+    }
+
+    public AssignedTagResponseDto toResponseDto() {
+        return AssignedTagResponseDto.builder()
+                .username(this.user.getUsername().toString())
+                .tagId(this.tag.getId().toString())
+                .manufacturer(this.tag.getManufacturer())
+                .tag_description(this.tag.getDescription())
+                .assignedAt(this.assignedAt)
                 .build();
     }
 }
