@@ -7,43 +7,47 @@ import com.packet.indoor.domain.user.User;
 import lombok.*;
 
 import java.time.LocalDateTime;
+import java.util.UUID;
 
 import javax.persistence.*;
 
 
 @Builder(builderClassName = "Builder")
 @Getter
-@Setter
 @AllArgsConstructor
-@NoArgsConstructor
 @Table(name = "assigned_tag")
 @Entity
 public class AssignedTag extends BaseEntity{
     
-    @EmbeddedId
-    private AssignedTagId assignedTagId;
+    @Id
+    private UUID id;
 
-    @NonNull
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER, optional = false)
     @JoinColumn(name = "userId")
     private User user;
 
-    @NonNull
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER, optional = false)
     @JoinColumn(name = "tagId")
     private Tag tag;
 
-    @Column(nullable = false)
-    @NonNull
-    private LocalDateTime registeredAt;
+    @Column(name = "assigned", nullable = false)
+    private Boolean assigned;
 
-    private LocalDateTime unregisteredAt;
+    @Column(name = "assigned_at", nullable = false)
+    private LocalDateTime assignedAt;
 
-    public static AssignedTag create(User user, Tag tag, LocalDateTime registeredAt) {
+    @Column(name = "unassigned_at")
+    private LocalDateTime unAssignedAt;
+
+    protected AssignedTag(){}
+
+    public static AssignedTag create(User user, Tag tag, LocalDateTime assignedAt) {
         return AssignedTag.builder()
+                .id(UUID.randomUUID())
                 .user(user)
                 .tag(tag)
-                .registeredAt(registeredAt)
+                .assigned(true)
+                .assignedAt(assignedAt)
                 .build();
     }
 }
