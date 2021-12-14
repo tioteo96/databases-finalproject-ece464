@@ -65,14 +65,18 @@
 
     submit.addEventListener('click', function (e) {
       let http = new XMLHttpRequest();
-      http.onreadystatechange = function () {
-        if (this.status == 200) {
-
-        }
-      };
-
       http.open('POST', 'http://localhost:8080/api/v1/login', true);
       http.setRequestHeader('Content-type', 'application/json');
+
+      http.onreadystatechange = function () {
+        if (this.status == 200) {
+          let response = JSON.parse(http.response)
+          if (response.role == 'ROLE_ADMIN') {
+            localStorage.setItem("token", response.access_token);
+            console.log('hello admin')
+          }
+        }
+      };
 
       var payload = {
         "username": document.getElementById("name-9e38").value,
