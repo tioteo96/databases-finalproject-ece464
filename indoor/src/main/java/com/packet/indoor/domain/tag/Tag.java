@@ -1,6 +1,7 @@
 package com.packet.indoor.domain.tag;
 
 import com.packet.indoor.domain.BaseEntity;
+import com.packet.indoor.domain.tag.dto.TagResponseDto;
 import com.packet.indoor.util.TagStatus;
 import lombok.*;
 
@@ -35,6 +36,15 @@ public class Tag extends BaseEntity{
                 .manufacturer(manufacturer)
                 .description(description)
                 .tagStatus(TagStatus.AVAILABLE)
+                .build();
+    }
+
+    public TagResponseDto toResponseDto(){
+        return TagResponseDto.builder()
+                .id(this.id.toString())
+                .manufacturer(this.manufacturer)
+                .description(this.description)
+                .tagStatus(this.tagStatus)
                 .build();
     }
 

@@ -2,6 +2,10 @@ package com.packet.indoor.controller;
 
 import com.packet.indoor.domain.tag.Tag;
 
+import com.packet.indoor.domain.tag.dto.TagCreateRequestDto;
+import com.packet.indoor.domain.tag.dto.TagResponseDto;
+import com.packet.indoor.service.TagService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -10,14 +14,13 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 public class TagController {
 
-//    @Autowired
-//    private TagRepository tagRepository;
+    @Autowired
+    private TagService tagService;
 
-    //TODO: register a new tag only through the admin user
     @PostMapping(value = "/register")
-    public ResponseEntity<?> registerTag(@RequestBody Tag tag){
-//        Tag created_tag = tagRepository.save(tag);
-        return new ResponseEntity<>(null, HttpStatus.OK);
+    public ResponseEntity<TagResponseDto> registerTag(@RequestBody TagCreateRequestDto requestDto){
+        TagResponseDto responseDto = tagService.registerNewTag(requestDto);
+        return new ResponseEntity<>(responseDto, HttpStatus.OK);
     }
 
     //TODO: assign a tag to a user and send error if tag is already occupied

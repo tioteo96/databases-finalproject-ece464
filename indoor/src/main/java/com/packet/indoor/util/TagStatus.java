@@ -6,6 +6,7 @@ public enum TagStatus {
 
     ASSIGNED("ASSIGNED"),
     AVAILABLE("AVAILABLE"),
+    OCCUPIED("OCCUPIED"),
     ;
 
     private String value;
