@@ -29,17 +29,16 @@ public class TagController {
         return new ResponseEntity<>(responseDto, HttpStatus.OK);
     }
 
-    //TODO: assign a tag to a user and send error if tag is already occupied
     @PostMapping(value = "/assign")
     public ResponseEntity<AssignedTagResponseDto> assignTag(@RequestParam String tagId, @RequestParam String username){
         AssignedTagResponseDto responseDto = assignedTagService.assignTagToUser(UUID.fromString(tagId), username);
         return new ResponseEntity<>(responseDto, HttpStatus.OK);
     }
 
-    //TODO: unassign a tag attached to a user and send error if tag is not assigned
     @PutMapping(value = "/unassign")
-    public ResponseEntity<?> unassignTag(){
-        return new ResponseEntity<>(null, HttpStatus.OK);
+    public ResponseEntity<AssignedTagResponseDto> unassignTag(@RequestParam String username){
+        AssignedTagResponseDto responseDto = assignedTagService.unAssignTag(username);
+        return new ResponseEntity<>(responseDto, HttpStatus.OK);
     }
 
     //TODO: find all tags

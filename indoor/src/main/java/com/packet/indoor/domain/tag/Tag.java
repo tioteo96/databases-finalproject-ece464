@@ -51,4 +51,8 @@ public class Tag extends BaseEntity{
     public void assign(){
         this.tagStatus = TagStatus.ASSIGNED;
     }
+
+    public void unAssign(){
+        this.tagStatus = TagStatus.AVAILABLE;
+    }
 }

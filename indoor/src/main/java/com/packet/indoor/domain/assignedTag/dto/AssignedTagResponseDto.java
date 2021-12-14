@@ -15,4 +15,5 @@ public class AssignedTagResponseDto {
     private String manufacturer;
     private String tag_description;
     private LocalDateTime assignedAt;
+    private LocalDateTime unAssignedAt;
 }

@@ -59,6 +59,13 @@ public class AssignedTag extends BaseEntity{
                 .manufacturer(this.tag.getManufacturer())
                 .tag_description(this.tag.getDescription())
                 .assignedAt(this.assignedAt)
+                .unAssignedAt(this.unAssignedAt)
                 .build();
+    }
+
+    public void unAssign() {
+        this.assigned = false;
+        this.unAssignedAt = LocalDateTime.now();
+        this.tag.unAssign();
     }
 }
