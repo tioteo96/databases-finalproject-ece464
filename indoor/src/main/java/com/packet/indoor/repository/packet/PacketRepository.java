@@ -9,6 +9,8 @@ import java.util.List;
 public interface PacketRepository {
     void save(Packet packet);
 
+    void save(List<Packet> packets);
+
     List<Packet> findAllPackets(String tagId);
 
     List<TagPackets> findTagPackets(String tagId, LocalDateTime from, LocalDateTime to, Integer quantity);
