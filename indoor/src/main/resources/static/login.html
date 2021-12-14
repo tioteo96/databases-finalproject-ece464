@@ -70,8 +70,9 @@
           if (this.status == 200) {
             let response = JSON.parse(http.response)
             if (response.role == 'ROLE_ADMIN') {
-              localStorage.setItem("token", response.access_token);
-              console.log('hello admin')
+              localStorage.setItem("token", JSON.stringify(response.access_token));
+              console.log('hello admin');
+              window.location.replace("http://localhost:8080/control");
             }
           }
         };
