@@ -62,17 +62,38 @@
             <div class="u-layout-row">
               <div class="u-container-style u-layout-cell u-size-20 u-layout-cell-1">
                 <div class="u-container-layout u-container-layout-1">
-                  <p class="u-text u-text-default u-text-1">All Tags</p>
+                  <table id="all_tags_table">
+                    <tr>
+                      <th>TagID</th>
+                      <th>Description</th>
+                      <th>Manufacturer</th>
+                      <th>TagStatus</th>
+                    </tr>
+                  </table>
                 </div>
               </div>
               <div class="u-container-style u-layout-cell u-size-20 u-layout-cell-2">
                 <div class="u-container-layout u-container-layout-2">
-                  <p class="u-text u-text-default u-text-2">Available Tags</p>
+                  <table id="all_available_tags_table">
+                    <tr>
+                      <th>TagID</th>
+                      <th>Description</th>
+                      <th>Manufacturer</th>
+                      <th>TagStatus</th>
+                    </tr>
+                  </table>
                 </div>
               </div>
               <div class="u-container-style u-layout-cell u-size-20 u-layout-cell-3">
                 <div class="u-container-layout u-container-layout-3">
-                  <p class="u-text u-text-default u-text-3">Unavailable Tags</p>
+                  <table id="all_unavailable_tags_table">
+                    <tr>
+                      <th>TagID</th>
+                      <th>Description</th>
+                      <th>Manufacturer</th>
+                      <th>TagStatus</th>
+                    </tr>
+                  </table>
                 </div>
               </div>
             </div>
@@ -106,14 +127,25 @@
             <div class="u-layout-row">
               <div class="u-container-style u-layout-cell u-size-30 u-layout-cell-4">
                 <div class="u-container-layout u-container-layout-4">
-                  <p class="u-text u-text-default u-text-4">* anchor 1<br>* anchor 2<br>* anchor 3
+                  <table id="all_anchors_table">
+                    <tr>
+                      <th>AnchorID</th>
+                      <th>Description</th>
+                      <th>Manufacturer</th>
+                    </tr>
+                  </table>
                   </p>
                 </div>
               </div>
               <div class="u-container-style u-layout-cell u-size-30 u-layout-cell-5">
                 <div class="u-container-layout u-valign-top u-container-layout-5">
-                  <p class="u-text u-text-default u-text-5">* user 1<br>* user 2<br>* user 3
-                  </p>
+                  <table id="all_users_table">
+                    <tr>
+                      <th>Username</th>
+                      <th>Groupname</th>
+                      <th>Role</th>
+                    </tr>
+                  </table>
                 </div>
               </div>
             </div>
@@ -135,10 +167,23 @@
           const headertoken = 'Bearer' + localStorage.getItem('token');
           http.setRequestHeader('Authorization', headertoken);
 
-          http.onreadystatechange = function () {
+          http.onload = function () {
               if (this.status == 200) {
-                  let response = JSON.parse(http.response)
+                  let response = JSON.parse(http.response);
                   console.log(response);
+                  var table = document.getElementById('all_tags_table');
+
+                  response.map((tag) => {
+                    var new_row = table.insertRow();
+                    var new_col_0 = new_row.insertCell(0);
+                    var new_col_1 = new_row.insertCell(1);
+                    var new_col_2 = new_row.insertCell(2);
+                    var new_col_3 = new_row.insertCell(3);
+                    new_col_0.innerHTML = tag['id'];
+                    new_col_1.innerHTML = tag['description'];
+                    new_col_2.innerHTML = tag['manufacturer'];
+                    new_col_3.innerHTML = tag['tagStatus'];
+                  });
               }
           };
           http.send();
@@ -9521,6 +9566,9 @@ section.u-image,
   position: relative;
   flex: 1;
   max-width: 100%;
+  overflow-y: auto; 
+  max-height: 400px; 
+  font-size: 12px;
 }
 .u-inner-container-layout,
 .u-container-layout > * {
