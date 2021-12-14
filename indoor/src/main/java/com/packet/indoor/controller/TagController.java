@@ -1,12 +1,15 @@
 package com.packet.indoor.controller;
 
 import com.packet.indoor.domain.assignedTag.dto.AssignedTagResponseDto;
+import java.util.List;
 import com.packet.indoor.domain.tag.Tag;
 
 import com.packet.indoor.domain.tag.dto.TagCreateRequestDto;
 import com.packet.indoor.domain.tag.dto.TagResponseDto;
 import com.packet.indoor.service.AssignedTagService;
 import com.packet.indoor.service.TagService;
+import com.packet.indoor.util.TagStatus;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -41,22 +44,25 @@ public class TagController {
         return new ResponseEntity<>(responseDto, HttpStatus.OK);
     }
 
-    //TODO: find all tags
     @GetMapping(value = "/all")
     public ResponseEntity<?> findAllTags(){
-        return new ResponseEntity<>(null, HttpStatus.OK);
+        List<TagResponseDto> responseDtos = tagService.findAllTags();
+        return new ResponseEntity<>(responseDtos, HttpStatus.OK);
     }
 
-    //TODO: find all tags that are available for assigning to user
     @GetMapping(value = "/all/available")
     public ResponseEntity<?> findAvailableTags(){
-        return new ResponseEntity<>(null, HttpStatus.OK);
+        TagStatus tagStatus = TagStatus.AVAILABLE;
+        List<TagResponseDto> responseDtos = tagService.findAllAvailableTags(tagStatus);
+        return new ResponseEntity<>(responseDtos, HttpStatus.OK); 
     }
 
     //TODO: find all tags that are currently unavailable
     @GetMapping(value = "/all/unavailable")
     public ResponseEntity<?> findUnAvailableTags(){
-        return new ResponseEntity<>(null, HttpStatus.OK);
+        TagStatus tagStatus = TagStatus.AVAILABLE;
+        List<TagResponseDto> responseDtos = tagService.findAllUnavailableTags(tagStatus);
+        return new ResponseEntity<>(responseDtos, HttpStatus.OK);
     }
 
 //    @GetMapping(value = "tag/{id}")
