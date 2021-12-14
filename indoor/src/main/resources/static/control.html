@@ -30,7 +30,7 @@
               <input placeholder="Tag Manufacturer" id="email-696f" name="tag_manu" class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white" type="text">
             </div>
             <div class="u-align-left u-form-group u-form-submit">
-              <a href="#" class="u-btn u-btn-submit u-button-style">Create Tag<br>
+              <a id="create_tag_btn" class="u-btn u-btn-submit u-button-style">Create Tag<br>
               </a>
               <input type="submit" value="submit" class="u-form-control-hidden">
             </div>
@@ -47,15 +47,15 @@
               <input placeholder="Username" id="email-696f" name="tag_username" class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white" type="text">
             </div>
             <div class="u-align-left u-form-group u-form-submit">
-              <a href="#" class="u-btn u-btn-submit u-button-style">Register Tag<br>
+              <a id="assign_tag_btn" class="u-btn u-btn-submit u-button-style">Assign Tag<br>
               </a>
               <input type="submit" value="submit" class="u-form-control-hidden">
             </div>
           </form>
         </div>
-        <a href="https://nicepage.com/c/product-list-website-templates" class="u-btn u-button-style u-btn-3">All Tags<br>
+        <a id="all_tags_btn" class="u-btn u-button-style u-btn-3">All Tags<br>
         </a>
-        <a href="https://nicepage.com/c/product-list-website-templates" class="u-btn u-button-style u-btn-4">All Unavailable Tags<br>
+        <a id="all_unavailable_tags_btn" class="u-btn u-button-style u-btn-4">All Unavailable Tags<br>
         </a>
         <div class="u-clearfix u-expanded-width u-layout-wrap u-layout-wrap-1">
           <div class="u-layout">
@@ -78,7 +78,7 @@
             </div>
           </div>
         </div>
-        <a href="https://nicepage.com/c/product-list-website-templates" class="u-btn u-button-style u-btn-5">All Available Tags<br>
+        <a id="all_available_tags_btn" class="u-btn u-button-style u-btn-5">All Available Tags<br>
         </a>
         <div class="u-form u-form-3">
           <form action="#" method="POST" class="u-clearfix u-form-spacing-10 u-form-vertical u-inner-form" source="custom" name="form-1" style="padding: 10px;">
@@ -121,6 +121,93 @@
         </div>
       </div>
     </section>
+  <script>
+      let all_tags_btn = document.getElementById("all_tags_btn");
+      let all_available_tags_btn = document.getElementById("all_available_tags_btn");
+      let all_unavailable_tags_btn = document.getElementById("all_unavailable_tags_btn");
+      let create_tag_btn = document.getElementById("create_tag_btn");
+      let assign_tag_btn = document.getElementById("assign_tag_btn");
+
+      all_tags_btn.addEventListener('click', function (e) {
+          let http = new XMLHttpRequest();
+          http.open('GET', 'http://localhost:8080/api/tag/all', true);
+          http.setRequestHeader('Content-type', 'application/json');
+          const headertoken = 'Bearer' + localStorage.getItem('token');
+          http.setRequestHeader('Authorization', headertoken);
+
+          http.onreadystatechange = function () {
+              if (this.status == 200) {
+                  let response = JSON.parse(http.response)
+                  console.log(response);
+              }
+          };
+          http.send();
+      });
+
+      all_available_tags_btn.addEventListener('click', function (e) {
+          let http = new XMLHttpRequest();
+          http.open('GET', 'http://localhost:8080/api/tag/all/available', true);
+          http.setRequestHeader('Content-type', 'application/json');
+          const headertoken = 'Bearer' + localStorage.getItem('token');
+          http.setRequestHeader('Authorization', headertoken);
+
+          http.onreadystatechange = function () {
+              if (this.status == 200) {
+                  let response = JSON.parse(http.response)
+                  console.log(response);
+              }
+          };
+          http.send();
+      });
+
+      all_unavailable_tags_btn.addEventListener('click', function (e) {
+          let http = new XMLHttpRequest();
+          http.open('GET', 'http://localhost:8080/api/tag/all/unavailable', true);
+          http.setRequestHeader('Content-type', 'application/json');
+          const headertoken = 'Bearer' + localStorage.getItem('token');
+          http.setRequestHeader('Authorization', headertoken);
+
+          http.onreadystatechange = function () {
+              if (this.status == 200) {
+                  let response = JSON.parse(http.response)
+                  console.log(response);
+              }
+          };
+          http.send();
+      });
+
+      create_tag_btn.addEventListener('click', function (e) {
+          let http = new XMLHttpRequest();
+          http.open('GET', 'http://localhost:8080/api/tag/all', true);
+          http.setRequestHeader('Content-type', 'application/json');
+          const headertoken = 'Bearer' + localStorage.getItem('token');
+          http.setRequestHeader('Authorization', headertoken);
+
+          http.onreadystatechange = function () {
+              if (this.status == 200) {
+                  let response = JSON.parse(http.response)
+
+              }
+          };
+          http.send();
+      });
+
+      register_tag_btn.addEventListener('click', function (e) {
+          let http = new XMLHttpRequest();
+          http.open('GET', 'http://localhost:8080/api/tag/all', true);
+          http.setRequestHeader('Content-type', 'application/json');
+          const headertoken = 'Bearer' + localStorage.getItem('token');
+          http.setRequestHeader('Authorization', headertoken);
+
+          http.onreadystatechange = function () {
+              if (this.status == 200) {
+                  let response = JSON.parse(http.response)
+
+              }
+          };
+          http.send();
+      });
+  </script>
   </body>
   <style>
 .u-section-1 .u-sheet-1 {
