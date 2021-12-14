@@ -1,13 +1,7 @@
 package com.packet.indoor.controller;
 
-import java.util.List;
-import java.util.Optional;
-
 import com.packet.indoor.domain.tag.Tag;
-import com.packet.indoor.domain.tag.TagId;
-import com.packet.indoor.repository.tag.TagRepository;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

@@ -1,34 +1,40 @@
 package com.packet.indoor.domain.tag;
 
 import com.packet.indoor.domain.BaseEntity;
+import com.packet.indoor.util.TagStatus;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.UUID;
 
 
 @Builder(builderClassName = "Builder")
 @Getter
-@Setter
 @AllArgsConstructor
-@NoArgsConstructor
 @Table(name = "tag")
 @Entity
 public class Tag extends BaseEntity{
     
-    @EmbeddedId
-    private TagId tagId;
+    @Id
+    private UUID id;
+
+    @Column(length = 100)
     private String manufacturer;
+    @Column(length = 255)
     private String description;
 
-    @Column(nullable = false)
-    @NonNull
-    private Boolean use_status;
+    @Enumerated(EnumType.STRING)
+    @Column(name = "tag_status", nullable = false)
+    private TagStatus tagStatus;
 
-    public static Tag create(String manufacturer, String description, Boolean use_status) {
+    protected Tag(){}
+
+    public static Tag create(String manufacturer, String description) {
         return Tag.builder()
+                .id(UUID.randomUUID())
                 .manufacturer(manufacturer)
                 .description(description)
-                .use_status(use_status)
+                .tagStatus(TagStatus.AVAILABLE)
                 .build();
     }
 
