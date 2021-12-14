@@ -39,6 +39,7 @@ public class UserService {
         Password password = passwordService.hashPasswordWithSalt(userCreateRequestDto.getPassword());
         UserStatus userStatus = UserStatus.create();
         User user = User.create(userId, username, password, userStatus, Role.ROLE_USER);
+        jpaUserRepository.save(user);
         return user.toResponseDto();
     }
 
