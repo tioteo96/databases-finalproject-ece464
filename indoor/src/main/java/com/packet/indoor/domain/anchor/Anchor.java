@@ -52,6 +52,7 @@ public class Anchor extends BaseEntity{
 
     public AnchorResponseDto toResponseDto(){
         return AnchorResponseDto.builder()
+                .id(this.id.toString())
                 .secret(this.secret.toString())
                 .manufacturer(this.manufacturer)
                 .description(this.description)

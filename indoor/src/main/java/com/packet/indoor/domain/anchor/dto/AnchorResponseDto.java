@@ -8,6 +8,7 @@ import lombok.Getter;
 @AllArgsConstructor
 @Builder(builderClassName = "Builder")
 public class AnchorResponseDto {
+    private String id;
     private String secret;
     private String manufacturer;
     private String description;
