@@ -20,14 +20,14 @@
     <section class="u-clearfix u-section-1" id="sec-e319">
       <div class="u-clearfix u-sheet u-sheet-1">
         <div class="u-form u-form-1">
-          <form action="#" method="POST" class="u-clearfix u-form-spacing-10 u-form-vertical u-inner-form" source="custom" name="form" style="padding: 10px;">
+          <form id="tag_create_form" action="#" method="POST" class="u-clearfix u-form-spacing-10 u-form-vertical u-inner-form" source="custom" name="form" style="padding: 10px;">
             <div class="u-form-group">
-              <label for="name-696f" class="u-label">Tag Description</label>
-              <input placeholder="Tag Description" id="name-696f" name="tag_desc" class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white" type="text">
+              <label for="tag_desc" class="u-label">Tag Description</label>
+              <input placeholder="Tag Description" id="tag_desc" name="tag_desc" class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white" type="text">
             </div>
             <div class="u-form-group">
-              <label for="email-696f" class="u-label">Tag Manufacturer</label>
-              <input placeholder="Tag Manufacturer" id="email-696f" name="tag_manu" class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white" type="text">
+              <label for="tag_manu" class="u-label">Tag Manufacturer</label>
+              <input placeholder="Tag Manufacturer" id="tag_manu" name="tag_manu" class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white" type="text">
             </div>
             <div class="u-align-left u-form-group u-form-submit">
               <a id="create_tag_btn" class="u-btn u-btn-submit u-button-style">Create Tag<br>
@@ -37,17 +37,22 @@
           </form>
         </div>
         <div class="u-form u-form-2">
-          <form action="#" method="POST" class="u-clearfix u-form-spacing-10 u-form-vertical u-inner-form" source="custom" name="form" style="padding: 10px;">
+          <form id="assign_form" action="#" method="POST" class="u-clearfix u-form-spacing-10 u-form-vertical u-inner-form" source="custom" name="form" style="padding: 10px;">
             <div class="u-form-group">
-              <label for="name-696f" class="u-label">Tag ID</label>
-              <input placeholder="Tag UUID" id="name-696f" name="tag_uuid" class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white" type="text">
+              <label for="tag_uuid" class="u-label">Tag ID</label>
+              <input placeholder="Tag UUID" id="tag_uuid" name="tag_uuid" class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white" type="text">
             </div>
             <div class="u-form-group">
-              <label for="email-696f" class="u-label">Username</label>
-              <input placeholder="Username" id="email-696f" name="tag_username" class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white" type="text">
+              <label for="tag_username" class="u-label">Username</label>
+              <input placeholder="Username" id="tag_username" name="tag_username" class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white" type="text">
             </div>
             <div class="u-align-left u-form-group u-form-submit">
               <a id="assign_tag_btn" class="u-btn u-btn-submit u-button-style">Assign Tag<br>
+              </a>
+              <input type="submit" value="submit" class="u-form-control-hidden">
+            </div>
+            <div class="u-align-left u-form-group u-form-submit">
+              <a id="unassign_tag_btn" class="u-btn u-btn-submit u-button-style">Unassign Tag<br>
               </a>
               <input type="submit" value="submit" class="u-form-control-hidden">
             </div>
@@ -102,17 +107,29 @@
         <a id="all_available_tags_btn" class="u-btn u-button-style u-btn-5">All Available Tags<br>
         </a>
         <div class="u-form u-form-3">
-          <form action="#" method="POST" class="u-clearfix u-form-spacing-10 u-form-vertical u-inner-form" source="custom" name="form-1" style="padding: 10px;">
+          <form id="anchor_create_form" action="#" method="POST" class="u-clearfix u-form-spacing-10 u-form-vertical u-inner-form" source="custom" name="form-1" style="padding: 10px;">
             <div class="u-form-group u-form-name">
-              <label for="name-1cde" class="u-label">Anchor Description</label>
-              <input type="text" placeholder="Anchor Description" id="name-1cde" name="anchor_description" class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white">
+              <label for="anchor_desc" class="u-label">Anchor Description</label>
+              <input type="text" placeholder="Anchor Description" id="anchor_desc" name="anchor_desc" class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white">
             </div>
             <div class="u-form-group">
-              <label for="email-1cde" class="u-label">Anchor Manufacturer</label>
-              <input type="text" placeholder="Anchor Manufacturer" id="email-1cde" name="anchor_manu" class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white" required="required">
+              <label for="anchor_manu" class="u-label">Anchor Manufacturer</label>
+              <input type="text" placeholder="Anchor Manufacturer" id="anchor_manu" name="anchor_manu" class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white" required="required">
+            </div>
+            <div class="u-form-group">
+              <label for="anchor_xcord" class="u-label">Anchor Manufacturer</label>
+              <input type="number" step="0.01" placeholder="Anchor Manufacturer" id="anchor_xcord" name="anchor_xcord" class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white" required="required">
+            </div>
+            <div class="u-form-group">
+              <label for="anchor_ycord" class="u-label">Anchor Manufacturer</label>
+              <input type="number" step="0.01" placeholder="Anchor Manufacturer" id="anchor_ycord" name="anchor_ycord" class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white" required="required">
+            </div>
+            <div class="u-form-group">
+              <label for="anchor_zcord" class="u-label">Anchor Manufacturer</label>
+              <input type="number" step="0.01" placeholder="Anchor Manufacturer" id="anchor_zcord" name="anchor_zcord" class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white" required="required">
             </div>
             <div class="u-align-left u-form-group u-form-submit">
-              <a href="#" class="u-btn u-btn-submit u-button-style">Create Anchor<br>
+              <a id="create_anchor_btn" class="u-btn u-btn-submit u-button-style">Create Anchor<br>
               </a>
               <input type="submit" value="submit" class="u-form-control-hidden">
             </div>
@@ -159,6 +176,8 @@
       let all_unavailable_tags_btn = document.getElementById("all_unavailable_tags_btn");
       let create_tag_btn = document.getElementById("create_tag_btn");
       let assign_tag_btn = document.getElementById("assign_tag_btn");
+      let unassign_tag_btn = document.getElementById("unassign_tag_btn")
+      let create_anchor_btn = document.getElementById("create_anchor_btn")
 
       all_tags_btn.addEventListener('click', function (e) {
           let http = new XMLHttpRequest();
@@ -223,23 +242,34 @@
 
       create_tag_btn.addEventListener('click', function (e) {
           let http = new XMLHttpRequest();
-          http.open('GET', 'http://localhost:8080/api/tag/all', true);
+          http.open('POST', 'http://localhost:8080/api/tag/register', true);
           http.setRequestHeader('Content-type', 'application/json');
           const headertoken = 'Bearer' + localStorage.getItem('token');
           http.setRequestHeader('Authorization', headertoken);
 
+          var payload = {
+              "manufacturer": document.getElementById("tag_manu").value,
+              "description": document.getElementById("tag_desc").value
+          }
+
           http.onreadystatechange = function () {
               if (this.status == 200) {
                   let response = JSON.parse(http.response)
-
+                  document.getElementById("tag_create_form").reset();
               }
           };
-          http.send();
+          http.send(JSON.stringify(payload));
       });
 
-      register_tag_btn.addEventListener('click', function (e) {
+      assign_tag_btn.addEventListener('click', function (e) {
           let http = new XMLHttpRequest();
-          http.open('GET', 'http://localhost:8080/api/tag/all', true);
+
+          params = {
+              "username" : document.getElementById("tag_username").value,
+              "tagId": document.getElementById("tag_uuid").value
+          }
+
+          http.open('POST', 'http://localhost:8080/api/tag/assign' + formatParams(params), true);
           http.setRequestHeader('Content-type', 'application/json');
           const headertoken = 'Bearer' + localStorage.getItem('token');
           http.setRequestHeader('Authorization', headertoken);
@@ -247,11 +277,65 @@
           http.onreadystatechange = function () {
               if (this.status == 200) {
                   let response = JSON.parse(http.response)
-
+                  document.getElementById("assign_form").reset();
               }
           };
           http.send();
       });
+
+      unassign_tag_btn.addEventListener('click', function (e) {
+          let http = new XMLHttpRequest();
+
+          params = {
+              "username" : document.getElementById("tag_username").value
+          }
+
+          http.open('PUT', 'http://localhost:8080/api/tag/unassign' + formatParams(params), true);
+          http.setRequestHeader('Content-type', 'application/json');
+          const headertoken = 'Bearer' + localStorage.getItem('token');
+          http.setRequestHeader('Authorization', headertoken);
+
+          http.onreadystatechange = function () {
+              if (this.status == 200) {
+                  let response = JSON.parse(http.response)
+                  document.getElementById("assign_form").reset();
+              }
+          };
+          http.send();
+      });
+
+      create_anchor_btn.addEventListener('click', function (e) {
+          let http = new XMLHttpRequest();
+          http.open('POST', 'http://localhost:8080/api/anchor/register', true);
+          http.setRequestHeader('Content-type', 'application/json');
+          const headertoken = 'Bearer' + localStorage.getItem('token');
+          http.setRequestHeader('Authorization', headertoken);
+
+          var payload = {
+              "manufacturer": document.getElementById("anchor_manu").value,
+              "description": document.getElementById("anchor_desc").value,
+              "xCoordinate": parseFloat(document.getElementById("anchor_xcord").value),
+              "yCoordinate": parseFloat(document.getElementById("anchor_ycord").value),
+              "zCoordinate": parseFloat(document.getElementById("anchor_zcord").value)
+          }
+
+          http.onreadystatechange = function () {
+              if (this.status == 200) {
+                  let response = JSON.parse(http.response)
+                  document.getElementById("anchor_create_form").reset();
+              }
+          };
+          http.send(JSON.stringify(payload));
+      });
+
+      function formatParams( params ){
+          return "?" + Object
+              .keys(params)
+              .map(function(key){
+                  return key+"="+encodeURIComponent(params[key])
+              })
+              .join("&")
+      }
   </script>
   </body>
   <style>
