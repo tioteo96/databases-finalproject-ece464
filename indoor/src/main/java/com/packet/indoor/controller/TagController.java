@@ -64,14 +64,4 @@ public class TagController {
         List<TagResponseDto> responseDtos = tagService.findAllUnavailableTags(tagStatus);
         return new ResponseEntity<>(responseDtos, HttpStatus.OK);
     }
-
-//    @GetMapping(value = "tag/{id}")
-//    public ResponseEntity<Tag> get_tag(@PathVariable("id") Long id){
-//        TagId tag_id = new TagId();
-//        tag_id.setId(id);
-//        Optional<Tag> opt_tag = tagRepository.findById(tag_id);
-//        if (!opt_tag.isPresent()) return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-//        Tag tag = opt_tag.get();
-//        return new ResponseEntity<>(tag, HttpStatus.OK);
-//    }
 }
