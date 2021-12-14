@@ -11,6 +11,7 @@ import com.packet.indoor.util.TagStatus;
 
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @AllArgsConstructor
 @Service
@@ -18,6 +19,7 @@ public class TagService {
 
     private TagRepository tagRepository;
 
+    @Transactional
     public TagResponseDto registerNewTag(TagCreateRequestDto requestDto) {
         Tag newTag = requestDto.toEntity();
         tagRepository.save(newTag);

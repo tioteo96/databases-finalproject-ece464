@@ -1,11 +1,12 @@
 package com.packet.indoor.controller;
 
+import com.packet.indoor.domain.assignedTag.dto.AssignedTagResponseDto;
 import java.util.List;
-
 import com.packet.indoor.domain.tag.Tag;
 
 import com.packet.indoor.domain.tag.dto.TagCreateRequestDto;
 import com.packet.indoor.domain.tag.dto.TagResponseDto;
+import com.packet.indoor.service.AssignedTagService;
 import com.packet.indoor.service.TagService;
 import com.packet.indoor.util.TagStatus;
 
@@ -14,12 +15,16 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.UUID;
+
 @RequestMapping("/api/tag")
 @RestController
 public class TagController {
 
     @Autowired
     private TagService tagService;
+    @Autowired
+    private AssignedTagService assignedTagService;
 
     @PostMapping(value = "/register")
     public ResponseEntity<TagResponseDto> registerTag(@RequestBody TagCreateRequestDto requestDto){
@@ -27,16 +32,16 @@ public class TagController {
         return new ResponseEntity<>(responseDto, HttpStatus.OK);
     }
 
-    //TODO: assign a tag to a user and send error if tag is already occupied
     @PostMapping(value = "/assign")
-    public ResponseEntity<?> assignTag(){
-        return new ResponseEntity<>(null, HttpStatus.OK);
+    public ResponseEntity<AssignedTagResponseDto> assignTag(@RequestParam String tagId, @RequestParam String username){
+        AssignedTagResponseDto responseDto = assignedTagService.assignTagToUser(UUID.fromString(tagId), username);
+        return new ResponseEntity<>(responseDto, HttpStatus.OK);
     }
 
-    //TODO: unassign a tag attached to a user and send error if tag is not assigned
     @PutMapping(value = "/unassign")
-    public ResponseEntity<?> unassignTag(){
-        return new ResponseEntity<>(null, HttpStatus.OK);
+    public ResponseEntity<AssignedTagResponseDto> unassignTag(@RequestParam String username){
+        AssignedTagResponseDto responseDto = assignedTagService.unAssignTag(username);
+        return new ResponseEntity<>(responseDto, HttpStatus.OK);
     }
 
     @GetMapping(value = "/all")

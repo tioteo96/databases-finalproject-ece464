@@ -48,4 +48,11 @@ public class Tag extends BaseEntity{
                 .build();
     }
 
+    public void assign(){
+        this.tagStatus = TagStatus.ASSIGNED;
+    }
+
+    public void unAssign(){
+        this.tagStatus = TagStatus.AVAILABLE;
+    }
 }
