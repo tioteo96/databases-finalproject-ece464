@@ -1,10 +1,13 @@
 package com.packet.indoor.repository.assignedTag;
 
 import com.packet.indoor.domain.assignedTag.AssignedTag;
-import com.packet.indoor.domain.assignedTag.AssignedTagId;
 
+import com.packet.indoor.domain.user.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface AssignedTagRepository extends JpaRepository<AssignedTag, AssignedTagId>{
-    
+import java.util.Optional;
+import java.util.UUID;
+
+public interface AssignedTagRepository extends JpaRepository<AssignedTag, UUID>{
+    Optional<AssignedTag> findByUserAndAssignedIsTrue(User user);
 }

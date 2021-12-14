@@ -11,7 +11,11 @@ public enum ErrorMessage {
     USER_DELETED("user is deleted"),
     WRONG_PASSWORD("worng password"),
 
-    USER_NOT_FOUND("user does not exist")
+    USER_NOT_FOUND("user does not exist"),
+    TAG_NOT_FOUND("tag does not exits"),
+
+    USER_ALREADY_ASSIGNED("user is already assigned to a tag"),
+    USER_NOT_ASSIGNED("user does not have an assigned tag"),
     ;
 
     private String value;
