@@ -41,6 +41,15 @@ public class PacketInfluxRepository implements PacketRepository{
     }
 
     @Override
+    public void save(List<Packet> packets) {
+        InfluxDBClient client = influxClient();
+        WriteApiBlocking writeApi = client.getWriteApiBlocking();
+
+        writeApi.writeMeasurements(WritePrecision.MS, packets);
+        client.close();
+    }
+
+    @Override
     public List<Packet> findAllPackets(String tagId) {
         InfluxDBClient client = influxClient();
         QueryApi queryApi = client.getQueryApi();
