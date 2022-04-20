@@ -10,10 +10,8 @@ import org.springframework.stereotype.Component;
 @Setter
 @Component
 public class JwtConfig {
-    @Value("${jwt.secret}")
-    private String secret;
-    @Value("${jwt.issuer}")
-    private String issuer;
+    @Value("${jwt.static-token}")
+    private String token;
     @Value("${jwt.enabled}")
     private Boolean enabled;
 }

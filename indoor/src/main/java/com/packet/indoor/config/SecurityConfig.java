@@ -1,7 +1,6 @@
 package com.packet.indoor.config;
 
 import com.packet.indoor.config.filter.AuthenticationFilter;
-import com.packet.indoor.util.JwtUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -32,7 +31,7 @@ public class SecurityConfig {
             http.csrf().disable()
                     .cors()
                     .and()
-                    .antMatcher("/api/v1/**")
+                    .antMatcher("/api/**")
                     .authorizeRequests()
                     .anyRequest().permitAll()
                     .and()
@@ -45,8 +44,6 @@ public class SecurityConfig {
     @Configuration
     public class ApiSecurityConfig extends WebSecurityConfigurerAdapter {
 
-        @Autowired
-        private JwtUtil jwtUtil;
         @Autowired
         private JwtConfig jwtConfig;
 
@@ -62,7 +59,7 @@ public class SecurityConfig {
                     .sessionManagement()
                     .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                     .and()
-                    .addFilterBefore(new AuthenticationFilter(jwtUtil, jwtConfig), UsernamePasswordAuthenticationFilter.class);
+                    .addFilterBefore(new AuthenticationFilter(jwtConfig), UsernamePasswordAuthenticationFilter.class);
         }
     }
 }
