@@ -1,6 +1,7 @@
 package com.packet.indoor.domain.assignedBoard;
 
 import com.packet.indoor.domain.assignedBoard.dto.AssignedBoardResponseDto;
+import com.packet.indoor.domain.assignedBoard.dto.AssignedBoardUserResponseDto;
 import com.packet.indoor.domain.board.Board;
 import com.packet.indoor.domain.visitor.Visitor;
 import lombok.AllArgsConstructor;
@@ -63,6 +64,14 @@ public class AssignedBoard {
                 .boardName(this.board.getBoardName())
                 .username(this.visitor.getUsername())
                 .assignedAt(this.assignedAt)
+                .build();
+    }
+
+    public AssignedBoardUserResponseDto toUserResponseDto() {
+        return AssignedBoardUserResponseDto.builder()
+                .id(this.id.toString())
+                .username(this.visitor.getUsername())
+                .visitorType(this.visitor.getType())
                 .build();
     }
 }
