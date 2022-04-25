@@ -15,5 +15,5 @@ public interface AssignedBoardRepository extends JpaRepository<AssignedBoard, UU
     Optional<AssignedBoard> findByBoardAndAssignedIsTrue(Board board);
     Optional<AssignedBoard> findByVisitorAndAssignedIsTrue(Visitor visitor);
     List<AssignedBoard> findByOrderByAssignedAtDesc();
-    Optional<AssignedBoard> findTopByAssignedIsFalseOrderByAssignedAtDesc();
+    List<AssignedBoard> findByIdIn(List<UUID> uuids);
 }

@@ -1,8 +1,7 @@
-package com.packet.indoor.domain;
+package com.packet.indoor.domain.location;
 
 import com.influxdb.query.FluxRecord;
 import com.packet.indoor.domain.visitor.Visitor;
-import com.packet.indoor.domain.visitor.VisitorType;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;

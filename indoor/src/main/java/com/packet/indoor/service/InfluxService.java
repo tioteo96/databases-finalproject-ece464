@@ -6,7 +6,7 @@ import com.influxdb.client.QueryApi;
 import com.influxdb.query.FluxRecord;
 import com.influxdb.query.FluxTable;
 import com.packet.indoor.config.InfluxConfig;
-import com.packet.indoor.domain.Location;
+import com.packet.indoor.domain.location.Location;
 import com.packet.indoor.domain.assignedBoard.AssignedBoard;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;

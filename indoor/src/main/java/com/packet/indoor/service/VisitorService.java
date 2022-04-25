@@ -1,8 +1,9 @@
 package com.packet.indoor.service;
 
-import com.packet.indoor.domain.Location;
+import com.packet.indoor.domain.location.Location;
 import com.packet.indoor.domain.assignedBoard.AssignedBoard;
 import com.packet.indoor.domain.assignedBoard.dto.AssignedBoardUserResponseDto;
+import com.packet.indoor.domain.location.dto.LocationRequestDto;
 import com.packet.indoor.repository.assignedBoard.AssignedBoardRepository;
 import lombok.AllArgsConstructor;
 import org.apache.commons.csv.CSVFormat;
@@ -11,10 +12,9 @@ import org.springframework.stereotype.Service;
 
 import java.io.IOException;
 import java.io.Writer;
-import java.time.LocalDateTime;
-import java.time.ZoneOffset;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 @AllArgsConstructor
@@ -33,11 +33,19 @@ public class VisitorService {
         return responseDtos;
     }
 
-    public void exportCsvFile(Writer writer) throws IOException {
+    public void exportCsvFile(LocationRequestDto requestDto, Writer writer) throws IOException {
         CSVPrinter csvPrinter = new CSVPrinter(writer, CSVFormat.DEFAULT);
         csvPrinter.printRecord("Time", "X", "Y", "Z", "Username", "User Type");
 
-        List<AssignedBoard> assignedBoards = assignedBoardRepository.findAll();
+        List<AssignedBoard> assignedBoards = new ArrayList<>();
+        if (requestDto == null || requestDto.getIds().isEmpty()) {
+            assignedBoards.addAll(assignedBoardRepository.findAll());
+        } else {
+            List<UUID> uuids = requestDto.getIds().stream()
+                    .map(s -> UUID.fromString(s))
+                    .collect(Collectors.toList());
+            assignedBoards.addAll(assignedBoardRepository.findByIdIn(uuids));
+        }
 
         for (AssignedBoard assignedBoard : assignedBoards) {
             List<Location> locations = influxService.findLocationOfAssignedBoard(assignedBoard);
