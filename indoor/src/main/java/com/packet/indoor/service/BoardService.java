@@ -59,7 +59,7 @@ public class BoardService {
                 visitorRepository.save(visitor);
             } else {
                 visitor = visitorOptional.get();
-                Optional<AssignedBoard> assignedBoardOptional = assignedBoardRepository.findByVisitor(visitor);
+                Optional<AssignedBoard> assignedBoardOptional = assignedBoardRepository.findByVisitorAndAssignedIsTrue(visitor);
                 if (assignedBoardOptional.isPresent()) throw new IllegalActionException(ErrorMessage.VISITOR_ALREADY_ASSIGNED);
             }
         } else {
@@ -84,7 +84,7 @@ public class BoardService {
 
         if (board.getBoardStatus().equals(BoardStatus.AVAILABLE)) throw new IllegalActionException(ErrorMessage.BOARD_ALREADY_UNASSIGNED);
 
-        Optional<AssignedBoard> assignedBoardOptional = assignedBoardRepository.findByBoard(board);
+        Optional<AssignedBoard> assignedBoardOptional = assignedBoardRepository.findByBoardAndAssignedIsTrue(board);
         if (assignedBoardOptional.isEmpty()) throw new IllegalActionException(ErrorMessage.DATA_NOT_SYNCED);
         AssignedBoard assignedBoard = assignedBoardOptional.get();
 

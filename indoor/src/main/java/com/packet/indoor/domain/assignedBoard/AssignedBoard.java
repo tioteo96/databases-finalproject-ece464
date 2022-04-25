@@ -59,6 +59,10 @@ public class AssignedBoard {
         this.board.unAssignBoard();
     }
 
+    public String getInfluxTag() {
+        return this.board.getBoardName().substring(2);
+    }
+
     public AssignedBoardResponseDto toResponseDto() {
         return AssignedBoardResponseDto.builder()
                 .boardName(this.board.getBoardName())
