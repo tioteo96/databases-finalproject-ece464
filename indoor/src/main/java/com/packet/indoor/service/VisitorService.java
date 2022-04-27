@@ -17,10 +17,7 @@ import org.springframework.stereotype.Service;
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.LocalTime;
-import java.time.ZoneId;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -74,14 +71,6 @@ public class VisitorService {
                 assignedBoards.addAll(assignedBoardRepository.findByIdIn(uuids));
             }
         } else {
-//            LocalDate fromLocalDate = fromDate.toInstant().atZone(ZoneId.of("America/New_York")).toLocalDate();
-//            LocalDate toLocalDate = toDate.toInstant().atZone(ZoneId.of("America/New_York")).toLocalDate();
-//            ZoneId test = ZoneId.systemDefault();
-//            LocalDate fromLocalDate = fromDate.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-//            LocalDate toLocalDate = toDate.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-//            LocalDateTime from = fromLocalDate.atTime(LocalTime.MIN);
-//            LocalDateTime to = toLocalDate.atTime(LocalTime.MAX);
-
             List<AssignedBoard> boards = assignedBoardRepository.findAllByAssignedAtBetween(from, to);
             assignedBoards.addAll(boards);
         }

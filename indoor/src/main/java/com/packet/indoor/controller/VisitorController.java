@@ -5,9 +5,7 @@ import com.packet.indoor.domain.location.dto.LocationRequestDto;
 import com.packet.indoor.exception.IllegalActionException;
 import com.packet.indoor.service.VisitorService;
 import com.packet.indoor.util.ErrorMessage;
-import lombok.Getter;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -16,7 +14,6 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.time.*;
 import java.time.format.DateTimeFormatter;
-import java.util.Date;
 import java.util.List;
 
 @RequestMapping("/api/visitor")
