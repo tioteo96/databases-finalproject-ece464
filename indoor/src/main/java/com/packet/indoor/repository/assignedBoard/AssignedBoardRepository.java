@@ -6,6 +6,7 @@ import com.packet.indoor.domain.visitor.Visitor;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import javax.swing.text.html.Option;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -16,4 +17,5 @@ public interface AssignedBoardRepository extends JpaRepository<AssignedBoard, UU
     Optional<AssignedBoard> findByVisitorAndAssignedIsTrue(Visitor visitor);
     List<AssignedBoard> findByOrderByAssignedAtDesc();
     List<AssignedBoard> findByIdIn(List<UUID> uuids);
+    List<AssignedBoard> findAllByAssignedAtBetween(LocalDateTime from, LocalDateTime to);
 }

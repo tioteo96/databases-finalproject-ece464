@@ -17,6 +17,10 @@ import org.springframework.stereotype.Service;
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.ZoneId;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -36,22 +40,14 @@ public class VisitorService {
         return responseDtos;
     }
 
-    public void exportCsvFile(LocationRequestDto requestDto, HttpServletResponse servletResponse) throws IOException {
+    public void exportCsvFile(LocationRequestDto requestDto, LocalDateTime from, LocalDateTime to, HttpServletResponse servletResponse) throws IOException {
         ServletOutputStream outputStream = servletResponse.getOutputStream();
 
         Workbook workbook = new XSSFWorkbook();
         Map<VisitorType, Sheet> sheets = createSheets(workbook);
         Map<VisitorType, Integer> rowCounts = createRowCounts();
 
-        List<AssignedBoard> assignedBoards = new ArrayList<>();
-        if (requestDto == null || requestDto.getIds().isEmpty()) {
-            assignedBoards.addAll(assignedBoardRepository.findAll());
-        } else {
-            List<UUID> uuids = requestDto.getIds().stream()
-                    .map(s -> UUID.fromString(s))
-                    .collect(Collectors.toList());
-            assignedBoards.addAll(assignedBoardRepository.findByIdIn(uuids));
-        }
+        List<AssignedBoard> assignedBoards = getAssignedBoards(requestDto, from, to);
 
         for (AssignedBoard assignedBoard : assignedBoards) {
             List<Location> locations = influxService.findLocationOfAssignedBoard(assignedBoard);
@@ -63,6 +59,34 @@ public class VisitorService {
         workbook.write(outputStream);
         workbook.close();
         outputStream.close();
+    }
+
+    private List<AssignedBoard> getAssignedBoards(LocationRequestDto requestDto, LocalDateTime from, LocalDateTime to) {
+        List<AssignedBoard> assignedBoards = new ArrayList<>();
+
+        if (from == null || to == null) {
+            if (requestDto == null || requestDto.getIds().isEmpty()) {
+                assignedBoards.addAll(assignedBoardRepository.findAll());
+            } else {
+                List<UUID> uuids = requestDto.getIds().stream()
+                        .map(s -> UUID.fromString(s))
+                        .collect(Collectors.toList());
+                assignedBoards.addAll(assignedBoardRepository.findByIdIn(uuids));
+            }
+        } else {
+//            LocalDate fromLocalDate = fromDate.toInstant().atZone(ZoneId.of("America/New_York")).toLocalDate();
+//            LocalDate toLocalDate = toDate.toInstant().atZone(ZoneId.of("America/New_York")).toLocalDate();
+//            ZoneId test = ZoneId.systemDefault();
+//            LocalDate fromLocalDate = fromDate.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+//            LocalDate toLocalDate = toDate.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+//            LocalDateTime from = fromLocalDate.atTime(LocalTime.MIN);
+//            LocalDateTime to = toLocalDate.atTime(LocalTime.MAX);
+
+            List<AssignedBoard> boards = assignedBoardRepository.findAllByAssignedAtBetween(from, to);
+            assignedBoards.addAll(boards);
+        }
+
+        return assignedBoards;
     }
 
     private void writeLocation(Location location, Map<VisitorType, Sheet> sheets, Map<VisitorType, Integer> rowCounts) {

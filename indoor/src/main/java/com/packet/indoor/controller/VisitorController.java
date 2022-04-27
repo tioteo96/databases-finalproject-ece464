@@ -2,18 +2,21 @@ package com.packet.indoor.controller;
 
 import com.packet.indoor.domain.assignedBoard.dto.AssignedBoardUserResponseDto;
 import com.packet.indoor.domain.location.dto.LocationRequestDto;
+import com.packet.indoor.exception.IllegalActionException;
 import com.packet.indoor.service.VisitorService;
+import com.packet.indoor.util.ErrorMessage;
 import lombok.Getter;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.time.*;
+import java.time.format.DateTimeFormatter;
+import java.util.Date;
 import java.util.List;
 
 @RequestMapping("/api/visitor")
@@ -30,10 +33,23 @@ public class VisitorController {
     }
 
     @GetMapping("/csv")
-    public void exportCsvFile(@RequestBody(required = false) LocationRequestDto requestDto, HttpServletResponse servletResponse) throws IOException {
+    public void exportCsvFile(@RequestBody(required = false) LocationRequestDto requestDto,
+                              @RequestParam(required = false) String from,
+                              @RequestParam(required = false) String to,
+                              HttpServletResponse servletResponse) throws IOException {
+
+        ZoneId est = ZoneId.of("America/New_York");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd").withZone(est);
+        LocalDateTime fromEST = LocalDate.parse(from, formatter).atTime(LocalTime.MIN);
+        LocalDateTime toEST = LocalDate.parse(to, formatter).atTime(LocalTime.MAX);
+        if (fromEST.isAfter(toEST)) throw new IllegalActionException(ErrorMessage.INVALID_DATE);
+
+        LocalDateTime fromUTC = fromEST.atZone(est).withZoneSameInstant(ZoneId.systemDefault()).toLocalDateTime();
+        LocalDateTime toUTC = toEST.atZone(est).withZoneSameInstant(ZoneId.systemDefault()).toLocalDateTime();
+
         servletResponse.setContentType("application/octet-stream");
         servletResponse.addHeader("Content-Disposition","attachment; filename=\"locations.xlsx\"");
 
-        visitorService.exportCsvFile(requestDto, servletResponse);
+        visitorService.exportCsvFile(requestDto, fromUTC, toUTC, servletResponse);
     }
 }

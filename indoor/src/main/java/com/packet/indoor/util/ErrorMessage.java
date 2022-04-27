@@ -26,6 +26,8 @@ public enum ErrorMessage {
     BOARD_NAME_REQUIRED("Board Name Required"),
     USERNAME_REQUIRED("Username Required"),
     VISITOR_TYPE_REQUIRED("Visitor Type Required"),
+
+    INVALID_DATE("From Cannot be Later than To")
     ;
 
     private String value;
