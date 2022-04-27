@@ -2,6 +2,7 @@ package com.packet.indoor.domain.location;
 
 import com.influxdb.query.FluxRecord;
 import com.packet.indoor.domain.visitor.Visitor;
+import com.packet.indoor.domain.visitor.VisitorType;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -17,7 +18,7 @@ public class Location {
     private String y;
     private String z;
     private String username;
-    private String visitorType;
+    private VisitorType visitorType;
 
     public static Location create(FluxRecord fluxRecord, Visitor visitor) {
         Instant time = (Instant) fluxRecord.getValueByKey("_time");
@@ -31,7 +32,7 @@ public class Location {
                 .y(y.toString())
                 .z(z.toString())
                 .username(visitor.getUsername())
-                .visitorType(visitor.getType().value())
+                .visitorType(visitor.getType())
                 .build();
     }
 }

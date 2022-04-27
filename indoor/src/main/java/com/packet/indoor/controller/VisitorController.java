@@ -31,9 +31,9 @@ public class VisitorController {
 
     @GetMapping("/csv")
     public void exportCsvFile(@RequestBody(required = false) LocationRequestDto requestDto, HttpServletResponse servletResponse) throws IOException {
-        servletResponse.setContentType("text/csv");
-        servletResponse.addHeader("Content-Disposition","attachment; filename=\"locations.csv\"");
+        servletResponse.setContentType("application/octet-stream");
+        servletResponse.addHeader("Content-Disposition","attachment; filename=\"locations.xlsx\"");
 
-        visitorService.exportCsvFile(requestDto, servletResponse.getWriter());
+        visitorService.exportCsvFile(requestDto, servletResponse);
     }
 }
