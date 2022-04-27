@@ -35,8 +35,8 @@ public class InfluxService {
         String stop = (!assignedBoard.getAssigned()) ? assignedBoard.getUnAssignedAt().toInstant(ZoneOffset.UTC).toString() : LocalDateTime.now().toInstant(ZoneOffset.UTC).toString();
 
         String flux = "from(bucket:\"" +  influxConfig.getBucket() + "\")\n" +
-                "|> range(start: -30d)\n" +
-//                "|> range(start: " + start + ", stop: " + stop + ")\n" +
+//                "|> range(start: -30d)\n" +
+                "|> range(start: " + start + ", stop: " + stop + ")\n" +
                 "|> filter(fn: (r) => r[\"_measurement\"] == \"mqtt_schema\")\n" +
                 "|> filter(fn: (r) => r[\"tag\"] == \"" + assignedBoard.getInfluxTag() + "\")\n" +
                 "|> pivot(rowKey: [\"_time\"], columnKey: [\"_field\"], valueColumn: \"_value\")";

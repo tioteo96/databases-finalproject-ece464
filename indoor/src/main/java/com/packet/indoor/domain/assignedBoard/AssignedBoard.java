@@ -60,7 +60,7 @@ public class AssignedBoard {
     }
 
     public String getInfluxTag() {
-        return this.board.getBoardName().substring(2);
+        return this.board.getBoardName().substring(2).toLowerCase();
     }
 
     public AssignedBoardResponseDto toResponseDto() {
