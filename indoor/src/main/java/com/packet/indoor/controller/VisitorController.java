@@ -35,14 +35,19 @@ public class VisitorController {
                               @RequestParam(required = false) String to,
                               HttpServletResponse servletResponse) throws IOException {
 
-        ZoneId est = ZoneId.of("America/New_York");
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd").withZone(est);
-        LocalDateTime fromEST = LocalDate.parse(from, formatter).atTime(LocalTime.MIN);
-        LocalDateTime toEST = LocalDate.parse(to, formatter).atTime(LocalTime.MAX);
-        if (fromEST.isAfter(toEST)) throw new IllegalActionException(ErrorMessage.INVALID_DATE);
+        LocalDateTime fromUTC = null;
+        LocalDateTime toUTC = null;
 
-        LocalDateTime fromUTC = fromEST.atZone(est).withZoneSameInstant(ZoneId.systemDefault()).toLocalDateTime();
-        LocalDateTime toUTC = toEST.atZone(est).withZoneSameInstant(ZoneId.systemDefault()).toLocalDateTime();
+        if (from != null && to != null) {
+            ZoneId est = ZoneId.of("America/New_York");
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd").withZone(est);
+            LocalDateTime fromEST = LocalDate.parse(from, formatter).atTime(LocalTime.MIN);
+            LocalDateTime toEST = LocalDate.parse(to, formatter).atTime(LocalTime.MAX);
+            if (fromEST.isAfter(toEST)) throw new IllegalActionException(ErrorMessage.INVALID_DATE);
+
+            fromUTC = fromEST.atZone(est).withZoneSameInstant(ZoneId.systemDefault()).toLocalDateTime();
+            toUTC = toEST.atZone(est).withZoneSameInstant(ZoneId.systemDefault()).toLocalDateTime();
+        }
 
         servletResponse.setContentType("application/octet-stream");
         servletResponse.addHeader("Content-Disposition","attachment; filename=\"locations.xlsx\"");
