@@ -46,11 +46,10 @@ public class InfluxService {
 
         for (FluxTable table : tables){
             for (FluxRecord record : table.getRecords()) {
-                Location location = Location.create(record, assignedBoard.getVisitor());
+                Location location = Location.create(record, assignedBoard.getVisitor(), assignedBoard.getBoard());
                 locations.add(location);
             }
         }
-
         return locations;
     }
 
