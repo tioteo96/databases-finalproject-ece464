@@ -40,9 +40,9 @@ public class VisitorController {
 
         if (from != null && to != null) {
             ZoneId est = ZoneId.of("America/New_York");
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd").withZone(est);
-            LocalDateTime fromEST = LocalDate.parse(from, formatter).atTime(LocalTime.MIN);
-            LocalDateTime toEST = LocalDate.parse(to, formatter).atTime(LocalTime.MAX);
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss").withZone(est);
+            LocalDateTime fromEST = LocalDateTime.parse(from, formatter);
+            LocalDateTime toEST = LocalDateTime.parse(to, formatter);
             if (fromEST.isAfter(toEST)) throw new IllegalActionException(ErrorMessage.INVALID_DATE);
 
             fromUTC = fromEST.atZone(est).withZoneSameInstant(ZoneId.systemDefault()).toLocalDateTime();
