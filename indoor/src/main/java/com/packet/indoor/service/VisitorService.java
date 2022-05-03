@@ -73,9 +73,9 @@ public class VisitorService {
 
     private void writeVector(List<AssignedBoard> assignedBoards, Map<String, Sheet> sheets) {
         List<AssignedBoard> vectorBoards = createVectorBoards(assignedBoards);
-        for (AssignedBoard assignedBoard : vectorBoards) {
-            System.out.println(assignedBoard.getVisitor().getType().value() + assignedBoard.getVisitor().getUsername() + assignedBoard.getBoard().getBoardName());
-        }
+//        for (AssignedBoard assignedBoard : vectorBoards) {
+//            System.out.println(assignedBoard.getVisitor().getType().value() + assignedBoard.getVisitor().getUsername() + assignedBoard.getBoard().getBoardName());
+//        }
         List<Location> locations = new ArrayList<>();
         for (AssignedBoard assignedBoard : vectorBoards) locations.addAll(influxService.findLocationOfAssignedBoard(assignedBoard));
         locations.sort((o1, o2) -> o1.getTime().compareTo(o2.getTime()));
@@ -94,14 +94,15 @@ public class VisitorService {
             for (Location location : locationsByDateTime.get(localDateTime)) recent.put(location.getName(), location);
             for (String name : recent.keySet()) {
                 Location location = recent.get(name);
-                writeLocation(location, sheets, boardColCounts, dateRowCounts);
+                writeLocation(location, sheets, boardColCounts, dateRowCounts, localDateTime);
             }
         }
+        Integer test = 0;
     }
 
-    private void writeLocation(Location location, Map<String, Sheet> sheets, Map<String, Map<String, Integer>> boardColCounts, LinkedHashMap<LocalDateTime, Integer> dateRowCounts) {
+    private void writeLocation(Location location, Map<String, Sheet> sheets, Map<String, Map<String, Integer>> boardColCounts, LinkedHashMap<LocalDateTime, Integer> dateRowCounts, LocalDateTime localDateTime) {
         Sheet sheet = sheets.get(location.getVisitorType().value()+"+17");
-        Row row = sheet.getRow(dateRowCounts.get(location.getTime()));
+        Row row = sheet.getRow(dateRowCounts.get(localDateTime));
 
         Cell xCell = row.getCell(boardColCounts.get(location.getVisitorType().value()).get(location.getBoardName()));
         Cell yCell = row.getCell(boardColCounts.get(location.getVisitorType().value()).get(location.getBoardName())+1);
@@ -119,7 +120,7 @@ public class VisitorService {
         Cell yCell = row.getCell(boardColCounts.get(location.getBoardName())+1);
         if (xCell == null) xCell = row.createCell(boardColCounts.get(location.getBoardName()));
         if (yCell == null) yCell = row.createCell(boardColCounts.get(location.getBoardName())+1);
-        xCell.setCellValue(location.getX());
+        xCell.setCellValue(location.getX()+17);
         yCell.setCellValue(location.getY());
     }
 
