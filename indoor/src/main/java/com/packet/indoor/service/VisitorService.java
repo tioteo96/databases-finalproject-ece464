@@ -108,7 +108,7 @@ public class VisitorService {
         Cell yCell = row.getCell(boardColCounts.get(location.getVisitorType().value()).get(location.getBoardName())+1);
         if (xCell == null) xCell = row.createCell(boardColCounts.get(location.getVisitorType().value()).get(location.getBoardName()));
         if (yCell == null) yCell = row.createCell(boardColCounts.get(location.getVisitorType().value()).get(location.getBoardName())+1);
-        xCell.setCellValue(location.getX());
+        xCell.setCellValue(location.getX17());
         yCell.setCellValue(location.getY());
     }
 
@@ -120,7 +120,7 @@ public class VisitorService {
         Cell yCell = row.getCell(boardColCounts.get(location.getBoardName())+1);
         if (xCell == null) xCell = row.createCell(boardColCounts.get(location.getBoardName()));
         if (yCell == null) yCell = row.createCell(boardColCounts.get(location.getBoardName())+1);
-        xCell.setCellValue(location.getX()+17);
+        xCell.setCellValue(location.getX());
         yCell.setCellValue(location.getY());
     }
 

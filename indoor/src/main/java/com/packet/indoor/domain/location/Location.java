@@ -46,4 +46,10 @@ public class Location {
     public String getName() {
         return this.visitorType.value() + "|" + this.boardName;
     }
+
+    public String getX17() {
+        Double x = Double.valueOf(this.x);
+        x += 17;
+        return String.valueOf(x);
+    }
 }
